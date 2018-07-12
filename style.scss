@@ -165,9 +165,23 @@ img {
 
 .site-avatar {
   float: left;
-  // Default values from Jekyll
-  // width: 70px;
-  // height: 70px;
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+
+  @include mobile {
+    float: none;
+    display: block;
+    margin: 0 auto;
+  }
+
+  img {
+    border-radius: 5px;
+  }
+}
+
+.neperix-avatar {
+  float: left;
   width: 171px;
   height: 78px;
   margin-right: 15px;
