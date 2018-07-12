@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Configuring DigitalOcean DNS for a subdomain hosted at GitHub pages
+tags: DigitalOcean GitHub GitHub-Pages Subdomain DNS
 ---
 
 This post will guide you set up a subdomain (for example blog.neperix.com) for your website hosted on a DigitalOcean's droplet to point to your GitHub pages website (for example petarmitrovic.github.io).

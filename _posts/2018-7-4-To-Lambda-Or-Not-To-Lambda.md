@@ -1,6 +1,7 @@
 ---
 layout: post
 title: To Lambda or Not to Lambda
+tags: java lambda stream-api retrospective
 ---
 
 Few months ago I worked on a project where one significant part was synchronizing the customer data. For the sake of simplicity and respecting my NDA, imagine we were updating menus of the restaurants that are using our platform.
