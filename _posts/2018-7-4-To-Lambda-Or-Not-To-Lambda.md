@@ -74,7 +74,7 @@ In all the examples below, consider `condition` is set to `true`. I've put it th
 
 ### Scenario 1: No exceptions are thrown from lambda expression:
 
-``` Java
+``` java
 @Test
 public void listStreamForeachNoExceptionInLambda() {
     if (condition) {
@@ -86,19 +86,22 @@ public void listStreamForeachNoExceptionInLambda() {
 }
 ```
 
-This one gives us the expected output:
-> 50
+This one gives us the expected output for the "happy path":
+
+``` sh
+50
 25
 12
 10
 5
 [INFO ] 2018-07-04 16:00:29.436 [main] TestLambdas - Test finished
+```
 
 Note: Here we used `forEach` from Stream API, but we would get the same results using the `forEach` defined in `Iterable` although those two might have different semantics.
 
 ### Scenario 2: A runtime exception is thrown from lambda expression:
 
-``` Java
+``` java
 @Test
 public void testUncheckedExceptionInLambda() {
     if (condition) {
@@ -113,7 +116,9 @@ public void testUncheckedExceptionInLambda() {
 Now, we all know that we'll get `ArithmeticException` if we try to perform `0 / 50`. But when developers are hasty to try new things, in their heads this runtime exception is magically handled in the lambda expression. And if not tested properly, it ends up in production.
 
 The output:
-> 50
+
+``` sh
+50
 25
 java.lang.ArithmeticException: / by zero
 at com.neperix.showcase.lambdas.TestLambdas.lambda$testUncheckedExceptionInLambda$2(TestLambdas.java:52)
@@ -121,12 +126,13 @@ at com.neperix.showcase.lambdas.TestLambdas.lambda$testUncheckedExceptionInLambd
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:580)
 	at com.neperix.showcase.lambdas.TestLambdas.testUncheckedExceptionInLambda(TestLambdas.java:52)
 	...
+```
 
 **Note** that the last line wasn't executed. In our case it was the line that marks the job as completed.
 
 ### Scenario 3:
 
-``` Java
+``` java
 @Test
 public void testUncheckedExceptionInLambdaWithParallelStream() {
     if (condition) {
@@ -137,10 +143,11 @@ public void testUncheckedExceptionInLambdaWithParallelStream() {
     log.info("Test finished");
 }
 ```
-The parallel stream is "better" than the plain stream in a sense that all the elements get processed. But please note that in neither of cases the final `Test finished` line wasn't printed out.
+The parallel stream is "better" than the plain stream in a sense that all the elements get processed. But note that neither here final `Test finished` line wasn't printed out.
 
 The output:
->25
+``` sh
+25
 10
 50
 5
@@ -159,6 +166,7 @@ java.lang.ArithmeticException
 	at java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:418)
 	at java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:583)
 	at com.neperix.showcase.lambdas.TestLambdas.testUncheckedExceptionInLambda(TestLambdas.java:52)
+```
 
 ## Takeaways
 - Don’t hesitate to use new language features, but make sure you understand how they work and if they really fit your need
