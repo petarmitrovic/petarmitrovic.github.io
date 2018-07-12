@@ -121,6 +121,8 @@ at com.neperix.showcase.lambdas.TestLambdas.lambda$testUncheckedExceptionInLambd
 	at com.neperix.showcase.lambdas.TestLambdas.testUncheckedExceptionInLambda(TestLambdas.java:52)
 	...
 
+**Note** that the last line wasn't executed. In our case it was the line that marks the job as completed.
+
 ### Scenario 3:
 
 ``` Java
@@ -160,4 +162,5 @@ java.lang.ArithmeticException
 ## Takeaways
 - Don’t hesitate to use new language features, but make sure you understand how they work and if they really fit your need
 - Don’t play with those features in production code. Instead, create a small separate project as a showcase.
-- Stress test that pilot project with various test scenarios to get the most understanding on how those new features work.
+- Stress test that pilot project with various scenarios to get the most understanding on how those new features work.
+- Have end to end test cases that cover both happy paths and unexpected scenarios
